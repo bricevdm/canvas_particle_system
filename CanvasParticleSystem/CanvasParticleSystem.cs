@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
-[RequireComponent(typeof(ParticleSystem))]
+[RequireComponent(typeof(ParticleSystem), typeof(CanvasRenderer))]
 public partial class CanvasParticleSystem : MaskableGraphic
 {
   [SerializeField]

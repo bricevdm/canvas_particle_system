@@ -11,7 +11,6 @@ public partial class CanvasParticleSystem
   {
     if (Application.isPlaying) return;
 
-    Init();
     base.OnValidate();
 
     useLegacyMeshGeneration = true;
@@ -20,6 +19,8 @@ public partial class CanvasParticleSystem
     pfx = GetComponent<ParticleSystem>();
     var pfxRenderer = GetComponent<ParticleSystemRenderer>();
     pfxRenderer.enabled = false;
+    
+    Init();
   }
   
 
