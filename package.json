@@ -1,0 +1,21 @@
+{
+  "name": "come.wizards-republic.canvas-particle-system",
+  "version": "0.0.1",
+  "displayName": "Canvas ParticleSystem",
+  "description": "Draw ParticleSystems into Canvas/GUI hierarchies by converting them into MaskableGraphics.",
+  "unity": "2020.1",
+  "unityRelease": "8f1",
+  "dependencies": {
+ },
+ "keywords": [
+    "framework",
+    "foundation"
+  ],
+  "author": {
+    "name": "Brice Vandemoortele",
+    "email": "info@wizards-republic.com",
+    "url": "http://wizards-republic.com"
+  },
+  "type": "library",
+  "hideInEditor": false
+}
