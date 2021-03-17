@@ -99,8 +99,13 @@ public partial class CanvasParticleSystem : MaskableGraphic
 
   private void CreateParticleSystemMesh(Mesh mesh)
   {
-    if (pfx.particleCount < 1) return;
-    
+    if (pfx.particleCount < 1)
+    {
+      mesh.Clear();
+      
+      return;
+    }
+
     var mainModule = pfx.main;
 
     bool isWorldSimulationSpace = mainModule.simulationSpace == ParticleSystemSimulationSpace.World;
