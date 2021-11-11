@@ -61,6 +61,8 @@ public partial class CanvasParticleSystem
 
       EditorGUI.EndDisabledGroup();
       
+      system.setCenterAsPosition = EditorGUILayout.Toggle("center to vertex position", system.setCenterAsPosition);
+      system.setScalesAndAgeToCoord1 = EditorGUILayout.Toggle("3D scale and normalized age to texcoord1", system.setScalesAndAgeToCoord1);
     }
   }
 }

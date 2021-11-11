@@ -57,6 +57,12 @@ public partial class CanvasParticleSystem
     AddVertex(v2, rightTop, color32, coord2);
     AddVertex(v3, rightBottom, color32, coord3);
 
+    if (setScalesAndAgeToCoord1)
+    {
+      Vector4 data = new Vector4(size3D.x, size3D.y, size3D.z, 1f - Mathf.Clamp01(particle.remainingLifetime / particle.startLifetime));
+      coords1[v0] = coords1[v1] = coords1[v2] = coords1[v3] = data;
+    }
+
     // set triangles indices
 
     int triangleIndex = particleIndex * 6;
@@ -72,7 +78,7 @@ public partial class CanvasParticleSystem
     Profiler.EndSample();
   }
 
-  public static void GetPositions(
+  public void GetPositions(
     ParticleSystem.Particle particle,
     bool isWorldSpace,
     Vector3 size3D,
@@ -92,6 +98,12 @@ public partial class CanvasParticleSystem
 
     float halfX = size3D.x * 0.5f;
     float halfY = size3D.y * 0.5f;
+
+    if (setCenterAsPosition)
+    {
+      leftBottom = leftTop = rightTop = rightBottom = center;
+      return;
+    }
 
     leftBottom = new Vector3(-halfX, -halfY);
     leftTop = new Vector3(-halfX, halfY);

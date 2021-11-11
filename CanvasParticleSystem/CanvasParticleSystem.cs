@@ -18,11 +18,18 @@ public partial class CanvasParticleSystem : MaskableGraphic
   private CanvasParticleSystemJobHelper jobHelper;
 #endif
 
+  [SerializeField]
+  private bool setCenterAsPosition;
+  
+  [SerializeField]
+  private bool setScalesAndAgeToCoord1;
+
   private ParticleSystem.Particle[] particles;
 
   private Vector3[] vertices;
   private Color32[] colors;
   private Vector4[] coords;
+  private Vector4[] coords1;
   private int[] triangles;
   
   public override Texture mainTexture
@@ -85,6 +92,11 @@ public partial class CanvasParticleSystem : MaskableGraphic
       vertices = new Vector3[vertexCount];
       colors = new Color32[vertexCount];
       coords = new Vector4[vertexCount];
+
+      if (setScalesAndAgeToCoord1)
+      {
+        coords1 = new Vector4[vertexCount];
+      }
     
       triangles = new int[maxCount * 6]; // 2 triangles per quad
     }
@@ -142,6 +154,11 @@ public partial class CanvasParticleSystem : MaskableGraphic
     mesh.SetVertices(vertices, 0, activeVerticesCount);
     mesh.SetColors(colors, 0, activeVerticesCount);
     mesh.SetUVs(0, coords, 0, activeVerticesCount);
+    
+    if (setScalesAndAgeToCoord1)
+    {
+      mesh.SetUVs(1, coords1, 0, activeVerticesCount);
+    }
 
     int activeTrianglesCount = particleCount * 6;
     mesh.SetTriangles(triangles, 0, activeTrianglesCount, 0);
