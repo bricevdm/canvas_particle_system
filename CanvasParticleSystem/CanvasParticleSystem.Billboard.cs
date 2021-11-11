@@ -13,7 +13,7 @@ public partial class CanvasParticleSystem
 
     Profiler.BeginSample("compute texture coordinates");
 
-    Vector2 coord0, coord1, coord2, coord3;
+    Vector4 coord0, coord1, coord2, coord3;
 
     if (textureSheetAnimation.enabled)
       CalculateAnimatedUvs(particle, textureSheetAnimation, out coord0, out coord1, out coord2, out coord3);
@@ -39,7 +39,7 @@ public partial class CanvasParticleSystem
 
     // set vertices
 
-    void AddVertex(int index, Vector3 position, Color32 color, Vector2 uv0)
+    void AddVertex(int index, Vector3 position, Color32 color, Vector4 uv0)
     {
       vertices[index] = position;
       colors[index] = color;

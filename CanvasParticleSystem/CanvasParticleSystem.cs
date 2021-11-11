@@ -22,7 +22,7 @@ public partial class CanvasParticleSystem : MaskableGraphic
 
   private Vector3[] vertices;
   private Color32[] colors;
-  private Vector2[] coords;
+  private Vector4[] coords;
   private int[] triangles;
   
   public override Texture mainTexture
@@ -84,7 +84,7 @@ public partial class CanvasParticleSystem : MaskableGraphic
       int vertexCount = maxCount * 4; // 4 vertices per quad
       vertices = new Vector3[vertexCount];
       colors = new Color32[vertexCount];
-      coords = new Vector2[vertexCount];
+      coords = new Vector4[vertexCount];
     
       triangles = new int[maxCount * 6]; // 2 triangles per quad
     }

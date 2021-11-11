@@ -7,22 +7,22 @@ public partial class CanvasParticleSystem
   private ParticleSystem.TextureSheetAnimationModule textureSheetAnimation;
   private ParticleSystem.MinMaxCurve frameOverTimeCurve;
 
-  public static void CalculateUvs(out Vector2 c0, out Vector2 c1, out Vector2 c2, out Vector2 c3)
+  public static void CalculateUvs(out Vector4 c0, out Vector4 c1, out Vector4 c2, out Vector4 c3)
   {
-    c0 = new Vector2(0f, 0f);
-    c1 = new Vector2(0f, 1f);
-    c2 = new Vector2(1f, 1f);
-    c3 = new Vector2(1f, 0f);
+    c0 = new Vector4(0f, 0f, 0f, 0f);
+    c1 = new Vector4(0f, 1f, 0f, 1f);
+    c2 = new Vector4(1f, 1f, 1f, 1f);
+    c3 = new Vector4(1f, 0f, 1f, 0f);
   }
 
   // TODO support animated UVs from Jobs
   private void CalculateAnimatedUvs(
     ParticleSystem.Particle particle,
     ParticleSystem.TextureSheetAnimationModule textureSheetAnimationModule,
-    out Vector2 uv0,
-    out Vector2 uv1,
-    out Vector2 uv2,
-    out Vector2 uv3)
+    out Vector4 uv0,
+    out Vector4 uv1,
+    out Vector4 uv2,
+    out Vector4 uv3)
   {
     float timeAlive = particle.startLifetime - particle.remainingLifetime;
     float lifeTimePerCycle = particle.startLifetime / textureSheetAnimationModule.cycleCount;
@@ -76,9 +76,9 @@ public partial class CanvasParticleSystem
     float eX = sX + xDelta;
     float eY = sY + yDelta;
 
-    uv0 = new Vector2(sX, sY);
-    uv1 = new Vector2(sX, eY);
-    uv2 = new Vector2(eX, eY);
-    uv3 = new Vector2(eX, sY);
+    uv0 = new Vector4(sX, sY, 0f, 0f);
+    uv1 = new Vector4(sX, eY, 0f, 1f);
+    uv2 = new Vector4(eX, eY, 1f, 1f);
+    uv3 = new Vector4(eX, sY, 1f, 0f);
   }
 }
