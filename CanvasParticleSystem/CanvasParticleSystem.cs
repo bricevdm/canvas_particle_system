@@ -25,6 +25,7 @@ public partial class CanvasParticleSystem : MaskableGraphic
   private bool setScalesAndAgeToCoord1;
 
   private ParticleSystem.Particle[] particles;
+  private readonly Bounds meshBounds = new Bounds(Vector3.zero, Screen.height * Vector3.one);
 
   private Vector3[] vertices;
   private Color32[] colors;
@@ -32,6 +33,7 @@ public partial class CanvasParticleSystem : MaskableGraphic
   private Vector4[] coords1;
   private int[] triangles;
   
+
   public override Texture mainTexture
   {
     get
@@ -106,6 +108,9 @@ public partial class CanvasParticleSystem : MaskableGraphic
   protected override void OnPopulateMesh(Mesh mesh)
   {
     CreateParticleSystemMesh(mesh);
+
+    // deal with edge case of invalid bounds when all vertices are in the same position
+    if (setCenterAsPosition && pfx.particleCount == 1) mesh.bounds = meshBounds;
   }
 #pragma warning restore 672
 
