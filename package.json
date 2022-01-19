@@ -1,5 +1,5 @@
 {
-  "name": "come.wizards-republic.canvas-particle-system",
+  "name": "com.wizards-republic.canvas-particle-system",
   "version": "0.0.1",
   "displayName": "Canvas ParticleSystem",
   "description": "Draw ParticleSystems into Canvas/GUI hierarchies by converting them into MaskableGraphics.",
