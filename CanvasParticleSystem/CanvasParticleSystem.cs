@@ -91,16 +91,22 @@ public partial class CanvasParticleSystem : MaskableGraphic
     
     {
       int vertexCount = maxCount * 4; // 4 vertices per quad
-      vertices = new Vector3[vertexCount];
-      colors = new Color32[vertexCount];
-      coords = new Vector4[vertexCount];
 
-      if (setScalesAndAgeToCoord1)
+      if (vertices == null || vertices.Length < vertexCount)
+      {
+        vertices = new Vector3[vertexCount];
+        colors = new Color32[vertexCount];
+        coords = new Vector4[vertexCount];
+      }
+
+      if (setScalesAndAgeToCoord1 && (coords1 == null || coords1.Length < vertexCount))
       {
         coords1 = new Vector4[vertexCount];
       }
-    
-      triangles = new int[maxCount * 6]; // 2 triangles per quad
+
+      int trianglesCount = maxCount * 6; // 2 triangles per quad
+      if (triangles == null || triangles.Length < trianglesCount)
+        triangles = new int[trianglesCount];
     }
   }
 
