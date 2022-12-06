@@ -7,7 +7,7 @@ public partial class CanvasParticleSystem
   {
     ParticleSystem.Particle particle = particles[particleIndex];
 
-    Color32 color32 = particle.GetCurrentColor(pfx);
+    Color32 color32 = particle.GetCurrentColor(Pfx);
 
     // compute texture coordinates
 
@@ -27,7 +27,7 @@ public partial class CanvasParticleSystem
 
     Profiler.BeginSample("compute vertex positions");
 
-    Vector3 size3D = particle.GetCurrentSize3D(pfx);
+    Vector3 size3D = particle.GetCurrentSize3D(Pfx);
     Matrix4x4 toLocalMatrix = rectTransform.worldToLocalMatrix;
     
     GetPositions(particle, isWorldSimulationSpace, size3D, toLocalMatrix,

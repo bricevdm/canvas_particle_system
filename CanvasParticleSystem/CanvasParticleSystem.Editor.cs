@@ -16,7 +16,6 @@ public partial class CanvasParticleSystem
     useLegacyMeshGeneration = true;
     raycastTarget = false;
 
-    pfx = GetComponent<ParticleSystem>();
     var pfxRenderer = GetComponent<ParticleSystemRenderer>();
     pfxRenderer.enabled = false;
     

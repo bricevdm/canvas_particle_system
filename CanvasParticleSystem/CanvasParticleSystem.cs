@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,8 @@ public partial class CanvasParticleSystem : MaskableGraphic
   private Vector2[] coords;
   private int[] triangles;
   
+  private readonly Bounds meshBounds = new Bounds(Vector3.zero, Screen.height * Vector3.one);
+  
   public override Texture mainTexture
   {
     get
@@ -39,6 +42,8 @@ public partial class CanvasParticleSystem : MaskableGraphic
       return s_WhiteTexture;
     }
   }
+
+  ParticleSystem Pfx => pfx != null ? pfx : pfx = GetComponent<ParticleSystem>();
 
   protected override void OnEnable()
   {
@@ -58,16 +63,16 @@ public partial class CanvasParticleSystem : MaskableGraphic
 
   protected void Update()
   {
-    pfx.Simulate(Time.deltaTime, true, false);
+    Pfx.Simulate(Time.deltaTime, true, false);
 
     UpdateGeometry();
   }
   
   private void Init()
   {
-    int maxCount = pfx.main.maxParticles;
+    int maxCount = Pfx.main.maxParticles;
 
-    textureSheetAnimation = pfx.textureSheetAnimation;
+    textureSheetAnimation = Pfx.textureSheetAnimation;
     frameOverTimeCurve = textureSheetAnimation.frameOverTime;
     
 #if CANVAS_PFX_JOBS
@@ -90,23 +95,25 @@ public partial class CanvasParticleSystem : MaskableGraphic
     }
   }
 
-#pragma warning disable 672
+  [Obsolete]
   protected override void OnPopulateMesh(Mesh mesh)
   {
     CreateParticleSystemMesh(mesh);
+
+    // deal with edge case of invalid bounds when all vertices are in the same position
+    if (Pfx.particleCount == 1) mesh.bounds = meshBounds;
   }
-#pragma warning restore 672
 
   private void CreateParticleSystemMesh(Mesh mesh)
   {
-    if (pfx.particleCount < 1)
+    if (Pfx.particleCount < 1)
     {
       mesh.Clear();
       
       return;
     }
 
-    var mainModule = pfx.main;
+    var mainModule = Pfx.main;
 
     bool isWorldSimulationSpace = mainModule.simulationSpace == ParticleSystemSimulationSpace.World;
 
@@ -124,7 +131,7 @@ public partial class CanvasParticleSystem : MaskableGraphic
       if (ReferenceEquals(particles, null) || particles.Length < mainModule.maxParticles) 
         particles = new ParticleSystem.Particle[mainModule.maxParticles];
 
-      int particleCount = pfx.GetParticles(particles);
+      int particleCount = Pfx.GetParticles(particles);
       CreateAllBillboards(mesh, particleCount, isWorldSimulationSpace);
     }
   }
