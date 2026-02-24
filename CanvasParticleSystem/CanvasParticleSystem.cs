@@ -43,7 +43,7 @@ public partial class CanvasParticleSystem : MaskableGraphic
     }
   }
 
-  ParticleSystem Pfx => pfx != null ? pfx : pfx = GetComponent<ParticleSystem>();
+  private ParticleSystem Pfx => pfx ? pfx : pfx = GetComponent<ParticleSystem>();
 
   protected override void OnEnable()
   {

@@ -57,7 +57,7 @@ public partial class CanvasParticleSystem
     AddVertex(v2, rightTop, color32, coord2);
     AddVertex(v3, rightBottom, color32, coord3);
 
-    // set triangles indices
+    // set triangle indices
 
     int triangleIndex = particleIndex * 6;
 

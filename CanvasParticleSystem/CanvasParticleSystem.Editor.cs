@@ -18,6 +18,12 @@ public partial class CanvasParticleSystem
 
     var pfxRenderer = GetComponent<ParticleSystemRenderer>();
     pfxRenderer.enabled = false;
+
+    if (pfx.main.maxParticles == 1000)
+    {
+        Debug.LogWarning("The maximum number of particles is the default value of 1000. " +
+                        "Consider setting the maximum number of particles to a lower value.");
+    }
     
     Init();
   }
